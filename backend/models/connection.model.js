@@ -11,7 +11,7 @@ const connectionRequest=new mongoose.Schema({
         ref:"User"
     },
     status_accepted:{
-        type:Boolean,
+        type:Boolean,  
         default:false
     }
 });
