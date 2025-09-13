@@ -3,8 +3,11 @@ import mongoose from "mongoose"
 import cors from "cors"
 import dotenv from "dotenv"
 import postsRoutes from "./routes/posts.routes.js"
+import userRoutes from "./routes/user.routes.js"
 
-dotenv.config();
+
+dotenv.config({ debug: true });
+
 
 const app=express();
 
@@ -12,14 +15,17 @@ app.use(cors());
 
 app.use(express.json());
 
-app.use(postsRoutes)
+app.use(postsRoutes);
+app.use(userRoutes)
+
+const port = process.env.PORT || 8080;
  
 const start=async ()=>{
   
        try {
-    await mongoose.connect("mongodb+srv://jakkulaajay449:h2Q5VxOuJ9sTycDp@ajay.muv4mcq.mongodb.net/?retryWrites=true&w=majority&appName=Ajay");
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to MongoDB");
-    app.listen(8080, () => {
+    app.listen(port, () => {
       console.log("App is Listening on port 8080");
     });
   } catch (err) {
