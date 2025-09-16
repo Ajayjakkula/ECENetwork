@@ -32,7 +32,7 @@ const postschema=mongoose.Schema({
        default:false
     },
     fileType:{
-       type:Boolean,
+       type:[String],
        default:''
     }
 })
