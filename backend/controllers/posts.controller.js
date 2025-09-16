@@ -139,4 +139,28 @@ export const deleteComment = async (req, res) => {
 };
 
 
+export const getAllCommentsOfPost = async (req, res) => {
+  const { token, post_id } = req.body;
+
+  try {
+    const user = await User.findOne({ token });
+    if (!user) {
+      return res.status(404).json({ message: "User Not Found" });
+    }
+    const post = await Post.findById(post_id);
+    if (!post) {
+      return res.status(404).json({ message: "Post Not Found" });
+    }
+    const comments = await Comment.find({ postId: post._id })
+      .populate('userId', 'name username email profilePicture') 
+      .sort({ createdAt: 1 }); 
+
+    return res.status(200).json({ comments });
+
+  } catch (err) {
+    return res.status(500).json({ message: err.message });
+  }
+};
+
+
 
