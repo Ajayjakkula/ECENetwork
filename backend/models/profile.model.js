@@ -16,8 +16,6 @@ const educationSchema = new mongoose.Schema({
   }
 });
 
-
-
 // Profile Schema
 const ProfileSchema = new mongoose.Schema({
   userId: {
